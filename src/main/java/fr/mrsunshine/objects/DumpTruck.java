@@ -10,8 +10,8 @@ public class DumpTruck extends Truck {
     private int dumpSize;
 
 
-    public DumpTruck(int code, String model, String brand, Date registration_date, int dumpSize) {
-        super(code, model, brand, registration_date);
+    public DumpTruck(int code, String model, String brand, Date registrationDate, int dumpSize) {
+        super(code, model, brand, registrationDate);
         this.dumpSize = dumpSize;
     }
 
@@ -32,7 +32,7 @@ public class DumpTruck extends Truck {
                 this.getCode(),
                 this.getBrand(),
                 this.getModel(),
-                DateUtils.formatDateObject(this.getRegistration_date()),
+                DateUtils.formatDateObject(this.getRegistrationDate()),
                 this.getDumpSize()
         );
     }

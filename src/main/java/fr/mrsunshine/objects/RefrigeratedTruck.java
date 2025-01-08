@@ -10,8 +10,8 @@ public class RefrigeratedTruck extends Truck {
     private int holdTemperature;
 
 
-    public RefrigeratedTruck(int code, String model, String brand, Date registration_date, int holdTemperature) {
-        super(code, model, brand, registration_date);
+    public RefrigeratedTruck(int code, String model, String brand, Date registrationDate, int holdTemperature) {
+        super(code, model, brand, registrationDate);
         this.holdTemperature = holdTemperature;
     }
 
@@ -32,7 +32,7 @@ public class RefrigeratedTruck extends Truck {
                 this.getCode(),
                 this.getBrand(),
                 this.getModel(),
-                DateUtils.formatDateObject(this.getRegistration_date()),
+                DateUtils.formatDateObject(this.getRegistrationDate()),
                 this.getHoldTemperature()
         );
     }

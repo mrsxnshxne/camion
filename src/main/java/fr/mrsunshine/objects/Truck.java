@@ -8,14 +8,14 @@ public abstract class Truck {
     private int code;
     private String model;
     private String brand;
-    private Date registration_date;
+    private Date registrationDate;
 
 
-    public Truck(int code, String model, String brand, Date registration_date) {
+    public Truck(int code, String model, String brand, Date registrationDate) {
         this.code = code;
         this.model = model;
         this.brand = brand;
-        this.registration_date = registration_date;
+        this.registrationDate = registrationDate;
     }
 
 
@@ -43,11 +43,11 @@ public abstract class Truck {
         this.brand = brand;
     }
 
-    public Date getRegistration_date() {
-        return registration_date;
+    public Date getRegistrationDate() {
+        return registrationDate;
     }
 
-    public void setRegistration_date(Date registration_date) {
-        this.registration_date = registration_date;
+    public void setRegistrationDate(Date registration_date) {
+        this.registrationDate = registration_date;
     }
 }

@@ -33,13 +33,13 @@ public class DateUtils {
                 return null;
             }
 
-            List<String> splited_date = List.of(date.split("/"));
-            if (splited_date.size() != 3) return null;
+            List<String> split = List.of(date.split("/"));
+            if (split.size() != 3) return null;
 
             return createDateObject(
-                    Integer.parseInt(splited_date.get(0)),
-                    Integer.parseInt(splited_date.get(1)),
-                    Integer.parseInt(splited_date.get(2))
+                    Integer.parseInt(split.get(0)),
+                    Integer.parseInt(split.get(1)),
+                    Integer.parseInt(split.get(2))
             );
         } catch (Exception e) {
             return null;

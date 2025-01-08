@@ -143,11 +143,11 @@ public class TruckHandler {
      * Just for initialising some data (for test)
      */
     public void initData() {
-        RefrigeratedTruck refregiratedTruck1 = new RefrigeratedTruck(1, "Truck", "Renault", new Date(123, 11, 23), 8);
+        RefrigeratedTruck refrigerateTruck1 = new RefrigeratedTruck(1, "Truck", "Renault", new Date(123, 11, 23), 8);
         DumpTruck dumpTruck1 = new DumpTruck(23, "Aero", "Volvo", new Date(118, 11, 10), 30);
         DumpTruck dumpTruck2 = new DumpTruck(3, "eActros", "Mercedes", new Date(116, 11, 5), 25);
 
-        this.addTruck(refregiratedTruck1);
+        this.addTruck(refrigerateTruck1);
         this.addTruck(dumpTruck1);
         this.addTruck(dumpTruck2);
     }

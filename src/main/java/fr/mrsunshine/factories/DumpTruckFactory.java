@@ -20,10 +20,10 @@ public class DumpTruckFactory implements TruckFactory {
             int code = InputReader.readInt("Entrez le code du camion:");
             String model = InputReader.readString("Entrez le modèle du camion:");
             String brand = InputReader.readString("Entrez la marque du camion:");
-            Date registration_date = InputReader.readDate("Entrez la date d'immatriculation (dd/MM/yyyy):");
+            Date registrationDate = InputReader.readDate("Entrez la date d'immatriculation (dd/MM/yyyy):");
             int holdSize = InputReader.readInt("Entrez le volume de la benne:");
 
-            if (model == null || brand == null || code == -1 || registration_date == null || holdSize == -1) {
+            if (model == null || brand == null || code == -1 || registrationDate == null || holdSize == -1) {
                 throw new Exception("Invalid data detected");
             }
 
@@ -31,7 +31,7 @@ public class DumpTruckFactory implements TruckFactory {
                     code,
                     model,
                     brand,
-                    registration_date,
+                    registrationDate,
                     holdSize
             );
 

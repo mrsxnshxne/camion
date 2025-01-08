@@ -20,10 +20,10 @@ public class RefrigeratedTruckFactory implements TruckFactory {
             int code = InputReader.readInt("Entrez le code du camion:");
             String model = InputReader.readString("Entrez le modèle du camion:");
             String brand = InputReader.readString("Entrez la marque du camion:");
-            Date registration_date = InputReader.readDate("Entrez la date d'immatriculation (dd/MM/yyyy):");
+            Date registrationDate = InputReader.readDate("Entrez la date d'immatriculation (dd/MM/yyyy):");
             int holdTemperature = InputReader.readInt("Entrez la temperature de la soute:");
 
-            if (model == null || brand == null || code == -1 || registration_date == null || holdTemperature == -1) {
+            if (model == null || brand == null || code == -1 || registrationDate == null || holdTemperature == -1) {
                 throw new Exception("Invalid data detected");
             }
 
@@ -31,7 +31,7 @@ public class RefrigeratedTruckFactory implements TruckFactory {
                     code,
                     model,
                     brand,
-                    registration_date,
+                    registrationDate,
                     holdTemperature
             );
 
