@@ -1,6 +1,8 @@
 package fr.mrsunshine.objects;
 
 
+import fr.mrsunshine.utils.DateUtils;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -36,7 +38,7 @@ public class DumpTruck extends Truck {
                 this.getCode(),
                 this.getBrand(),
                 this.getModel(),
-                requiredDate,
+                DateUtils.formatDateObject(this.getRegistration_date()),
                 this.getDumpSize()
         );
     }

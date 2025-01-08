@@ -1,6 +1,8 @@
 package fr.mrsunshine.objects;
 
 
+import fr.mrsunshine.utils.DateUtils;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -27,16 +29,12 @@ public class RefrigeratedTruck extends Truck {
 
     @Override
     public String toString() {
-
-        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        String requiredDate = formatter.format(this.getRegistration_date());
-
         return String.format(
                 "<blue>#%s <reset>- %s %s immatriculé le %s possède une soute à %s degrés.",
                 this.getCode(),
                 this.getBrand(),
                 this.getModel(),
-                requiredDate,
+                DateUtils.formatDateObject(this.getRegistration_date()),
                 this.getHoldTemperature()
         );
     }

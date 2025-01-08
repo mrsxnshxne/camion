@@ -1,7 +1,7 @@
 package fr.mrsunshine.instances;
 
+import fr.mrsunshine.factories.TruckFactory;
 import fr.mrsunshine.hmi.TerminalHandler;
-import fr.mrsunshine.hmi.InputReader;
 import fr.mrsunshine.objects.DumpTruck;
 import fr.mrsunshine.objects.RefrigeratedTruck;
 import fr.mrsunshine.objects.Truck;
@@ -53,17 +53,6 @@ public class TruckHandler {
         this.trucks = trucks;
     }
 
-
-    /**
-     * Show all existing trucks
-     */
-    public void showTrucks() {
-        for (Truck truck : this.getSortedTrucks()) {
-            TerminalHandler.println(truck.toString());
-        }
-    }
-
-
     // Truck
 
     /**
@@ -86,8 +75,12 @@ public class TruckHandler {
      * @param truck Truck
      */
     public void addTruck(Truck truck) {
-        if (truck == null) return;
+        if (truck == null) {
+            TerminalHandler.println("<yellow>Erreur, le camion n'a pas été ajouté.<reset>");
+            return;
+        }
         this.trucks.add(truck);
+        TerminalHandler.println("<green>Camion ajouté avec succès.<reset>");
     }
 
 
@@ -98,155 +91,51 @@ public class TruckHandler {
     public void removeTruck(Truck truck) {
         if (truck == null) return;
         this.trucks.remove(truck);
+        TerminalHandler.println("<green>Camion supprimé avec succès.<reset>");
     }
 
 
-    // Refrigerated truck
+    // Factory
 
     /**
      * Ask the user for all information needed and if something is wrong/miss-spelled, the code send a message to prevent the user.
      * Else, the truck is added to the truck list.
      */
-    public void addRefrigeratedTruck() {
-        try {
-            int code = InputReader.readInt("Entrez le code du camion:");
-            String model = InputReader.readString("Entrez le modèle du camion:");
-            String brand = InputReader.readString("Entrez la marque du camion:");
-            int registration_day = InputReader.readInt("Entrez le jour d'immatriculation:");
-            int registration_month = InputReader.readInt("Entrez le mois d'immatriculation:");
-            int registration_year = InputReader.readInt("Entrez l'année d'immatriculation:");
-            int holdTemperature = InputReader.readInt("Entrez la temperature de la soute:");
+    public void addTruck(TruckFactory truckFactory) {
+        Truck truck = truckFactory.createTruck();
 
-            if (model == null || brand == null || code == -1 || registration_day == -1 || registration_month == -1 || registration_year == -1 || holdTemperature == -1) {
-                throw new Exception();
-            }
-
-            if (this.getTruck(code) != null) {
-                throw new Exception();
-            }
-
-            RefrigeratedTruck refrigeratedTruck = new RefrigeratedTruck(code, model, brand, new Date(registration_year-1900, registration_month-1, registration_day), holdTemperature);
-            this.addTruck(refrigeratedTruck);
-
-            TerminalHandler.println("<green>Camion frigorifique ajouté avec succès.<reset>");
-
-        } catch (Exception e) {
-            TerminalHandler.invalidEntries();
+        if (this.getTruck(truck.getCode()) != null) {
+            TerminalHandler.println("<yellow>A truck with this code already exist<reset>");
+        } else {
+            this.addTruck(truck);
         }
     }
 
 
     /**
      * Ask the user for the code of the truck to remove.
-     * If the code is invalid or is owned by a non-refrigerated truck, an invalid syntax is sent.
+     * If the code is invalid or is owned by a non-specific truck, an invalid syntax message is sent.
      * Else, the truck is removed.
      */
-    public void removeRefrigeratedTruck() {
-        int code = InputReader.readInt("Numéro du camion frigorifique à supprimer:");
-
-        if (code == -1) {
-            TerminalHandler.invalidEntry();
-
-        } else {
-            Truck truck = this.getTruck(code);
-
-            if (truck instanceof RefrigeratedTruck) {
-                this.removeTruck(truck);
-                TerminalHandler.println("<green>Camion frigorifique supprimé avec succès.<reset>");
-
-            } else {
-                TerminalHandler.println("<yellow>Ce camion n'est pas un camion frigorifique.<reset>");
-            }
-        }
+    public void removeTruck(TruckFactory truckFactory) {
+        truckFactory.removeTruck(this);
     }
 
 
     /**
-     * Show all refrigerated trucks in the truck list (and sorted by their code)
+     * Show all trucks in the truck list (and sorted by their code)
+     * If a factory is provided, we use the factory showTrunks function
      */
-    public void showRefrigeratedTrucks() {
-        for (Truck truck : this.getSortedTrucks()) {
-            if (truck instanceof RefrigeratedTruck) {
+    public void showTrucks(TruckFactory truckFactory) {
+        if (truckFactory == null) {
+            for (Truck truck : this.getSortedTrucks()) {
                 TerminalHandler.println(truck.toString());
             }
-        }
-    }
-
-
-    // Dump truck
-
-    /**
-     * Ask the user for all information needed and if something is wrong/miss-spelled, the code send a message to prevent the user.
-     * Else, the truck is added to the truck list.
-     */
-    public void addDumpTruck() {
-
-        try {
-            int code = InputReader.readInt("Entrez le code du camion:");
-            String model = InputReader.readString("Entrez le modèle du camion:");
-            String brand = InputReader.readString("Entrez la marque du camion:");
-            int registration_day = InputReader.readInt("Entrez le jour d'immatriculation:");
-            int registration_month = InputReader.readInt("Entrez le mois d'immatriculation:");
-            int registration_year = InputReader.readInt("Entrez l'année d'immatriculation:");
-            int holdSize = InputReader.readInt("Entrez le volume de la benne:");
-
-            if (model == null || brand == null || code == -1 || registration_day == -1 || registration_month == -1 || registration_year == -1 || holdSize == -1) {
-                throw new Exception();
-            }
-
-            if (this.getTruck(code) != null) {
-                throw new Exception();
-            }
-
-            DumpTruck dumpTruck = new DumpTruck(code, model, brand, new Date(registration_year-1900, registration_month-1, registration_day), holdSize);
-            this.addTruck(dumpTruck);
-
-            TerminalHandler.println("<green>Camion benne ajouté avec succès.<reset>");
-
-        } catch (Exception e) {
-            TerminalHandler.invalidEntries();
-        }
-    }
-
-
-    /**
-     * Ask the user for the code of the truck to remove.
-     * If the code is invalid or is owned by a non-dump truck, an invalid syntax is sent.
-     * Else, the truck is removed.
-     */
-    public void removeDumpTruck() {
-        int code = InputReader.readInt("Numéro du camion benne à supprimer:");
-
-        if (code == -1) {
-            TerminalHandler.invalidEntry();
-
         } else {
-            Truck truck = this.getTruck(code);
-
-            if (truck instanceof DumpTruck) {
-                this.removeTruck(truck);
-                TerminalHandler.println("<green>Camion benne supprimé avec succès.<reset>");
-
-            } else {
-                TerminalHandler.println("<yellow>Ce camion n'est pas un camion benne.<reset>");
-            }
+            truckFactory.showTrucks(this.getSortedTrucks());
         }
     }
 
-
-    /**
-     * Show all dump trucks in the truck list (and sorted by their code)
-     */
-    public void showDumpTrucks() {
-        for (Truck truck : this.getSortedTrucks()) {
-            if (truck instanceof DumpTruck) {
-                TerminalHandler.println(truck.toString());
-            }
-        }
-    }
-
-
-    // Initialising some values
 
     /**
      * Just for initialising some data (for test)

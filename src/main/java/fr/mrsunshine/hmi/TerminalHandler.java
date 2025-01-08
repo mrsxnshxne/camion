@@ -19,12 +19,14 @@ public class TerminalHandler {
                 .replaceAll("<white>", "\u001B[37m");
     }
 
+
     /**
      * The classic println but with color parsing
      */
     public static void println(String entry) {
         System.out.println(parse(entry));
     }
+
 
     /**
      * Show an invalid entry message
@@ -33,12 +35,14 @@ public class TerminalHandler {
         println("<yellow>Entrée invalide. Veuillez vérifier la syntaxe puis réessayer.<reset>");
     }
 
+
     /**
      * Show an invalid entries message
      */
     public static void invalidEntries() {
         println("<yellow>Une ou plusieurs entrées sont invalides. Veuillez vérifier la syntaxe puis réessayer.<reset>");
     }
+
 
     /**
      * Show the main menu of the application
