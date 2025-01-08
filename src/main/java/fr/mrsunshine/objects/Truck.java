@@ -3,7 +3,7 @@ package fr.mrsunshine.objects;
 
 import java.util.Date;
 
-public class Truck {
+public abstract class Truck {
 
     private int code;
     private String model;
