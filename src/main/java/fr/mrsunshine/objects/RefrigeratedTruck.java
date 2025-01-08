@@ -3,8 +3,6 @@ package fr.mrsunshine.objects;
 
 import fr.mrsunshine.utils.DateUtils;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class RefrigeratedTruck extends Truck {
@@ -30,7 +28,7 @@ public class RefrigeratedTruck extends Truck {
     @Override
     public String toString() {
         return String.format(
-                "<blue>#%s <reset>- %s %s immatriculé le %s possède une soute à %s degrés.",
+                "<blue>[FRIGO] #%s <reset>- %s %s immatriculé le %s possède une soute à %s degrés.",
                 this.getCode(),
                 this.getBrand(),
                 this.getModel(),

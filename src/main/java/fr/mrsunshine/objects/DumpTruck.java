@@ -3,8 +3,6 @@ package fr.mrsunshine.objects;
 
 import fr.mrsunshine.utils.DateUtils;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class DumpTruck extends Truck {
@@ -29,12 +27,8 @@ public class DumpTruck extends Truck {
 
     @Override
     public String toString() {
-
-        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        String requiredDate = formatter.format(this.getRegistration_date());
-
         return String.format(
-                "<green>#%s <reset>- %s %s immatriculé le %s possède une benne de %s mètres cube.",
+                "<green>[BENNE] #%s <reset>- %s %s immatriculé le %s possède une benne de %s mètres cube.",
                 this.getCode(),
                 this.getBrand(),
                 this.getModel(),
