@@ -8,20 +8,23 @@ import fr.mrsunshine.instances.TruckHandler;
 
 public class Main {
 
+    public static void main(String[] args) {
+        Main.startApplication();
+    }
+
+
     public static void startApplication() {
 
         TruckHandler truckHandler = TruckHandler.getInstance();
-        truckHandler.init();
-
+        truckHandler.initData();
         TerminalHandler.println("Bienvenue sur le gestionnaire de camion.");
 
         while (true) {
 
-            showMenu();
+            TerminalHandler.showMenu();
             int inputResponse = InputReader.readInt("Votre sélection:");
 
             switch (inputResponse) {
-
                 case 1:
                     truckHandler.addRefrigeratedTruck();
                     break;
@@ -57,21 +60,5 @@ public class Main {
                     TerminalHandler.invalidEntry();
             }
         }
-    }
-
-
-    private static void showMenu() {
-        TerminalHandler.println("----------------------------------");
-        TerminalHandler.println("<blue>1. <reset>Ajouter un camion frigorifique");
-        TerminalHandler.println("<blue>2. <reset>Supprimer un camion frigorifique");
-        TerminalHandler.println("<blue>3. <reset>Lister les camions frigorifique");
-
-        TerminalHandler.println("<green>4. <reset>Ajouter un camion benne");
-        TerminalHandler.println("<green>5. <reset>Supprimer un camion benne");
-        TerminalHandler.println("<green>6. <reset>Lister les camions benne");
-
-        TerminalHandler.println("<purple>7. <reset>Afficher tous les camions");
-        TerminalHandler.println("<red>0. <reset>Quitter l'application");
-        TerminalHandler.println("----------------------------------");
     }
 }
