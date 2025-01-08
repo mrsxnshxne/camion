@@ -6,8 +6,8 @@ import fr.mrsunshine.hmi.TerminalHandler;
 import fr.mrsunshine.instances.TruckHandler;
 import fr.mrsunshine.objects.DumpTruck;
 import fr.mrsunshine.objects.Truck;
-import fr.mrsunshine.utils.DateUtils;
 
+import java.util.Date;
 import java.util.List;
 
 public class DumpTruckFactory implements TruckFactory {
@@ -20,19 +20,18 @@ public class DumpTruckFactory implements TruckFactory {
             int code = InputReader.readInt("Entrez le code du camion:");
             String model = InputReader.readString("Entrez le modèle du camion:");
             String brand = InputReader.readString("Entrez la marque du camion:");
-            int registration_day = InputReader.readInt("Entrez le jour d'immatriculation:");
-            int registration_month = InputReader.readInt("Entrez le mois d'immatriculation:");
-            int registration_year = InputReader.readInt("Entrez l'année d'immatriculation:");
+            Date registration_date = InputReader.readDate("Entrez la date d'immatriculation (dd/MM/yyyy):");
             int holdSize = InputReader.readInt("Entrez le volume de la benne:");
 
-            if (model == null || brand == null || code == -1 || registration_day == -1 || registration_month == -1 || registration_year == -1 || holdSize == -1) {
+            if (model == null || brand == null || code == -1 || registration_date == null || holdSize == -1) {
                 throw new Exception("Invalid data detected");
             }
 
             return new DumpTruck(
-                    code, model,
+                    code,
+                    model,
                     brand,
-                    DateUtils.createDateObject(registration_day, registration_month, registration_year),
+                    registration_date,
                     holdSize
             );
 

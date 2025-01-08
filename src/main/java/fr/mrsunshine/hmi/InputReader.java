@@ -1,5 +1,8 @@
 package fr.mrsunshine.hmi;
 
+import fr.mrsunshine.utils.DateUtils;
+
+import java.util.Date;
 import java.util.Scanner;
 
 
@@ -33,6 +36,22 @@ public class InputReader {
             return read(text).nextInt();
         } catch (Exception e) {
             return -1;
+        }
+    }
+
+
+    /**
+     * Ask for a Date usign the following formats: "dd/MM/yyyy", "dd-MM-yyyy" or "dd.MM.yyyy"
+     * @param text The text containing the question to answer
+     * @return A Date object
+     */
+    public static Date readDate(String text) {
+        try {
+            String entry = read(text).next();
+            return DateUtils.createDateObject(entry);
+
+        } catch (Exception e) {
+            return null;
         }
     }
 }

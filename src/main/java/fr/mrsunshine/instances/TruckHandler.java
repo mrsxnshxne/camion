@@ -104,10 +104,12 @@ public class TruckHandler {
     public void addTruck(TruckFactory truckFactory) {
         Truck truck = truckFactory.createTruck();
 
-        if (this.getTruck(truck.getCode()) != null) {
-            TerminalHandler.println("<yellow>A truck with this code already exist<reset>");
-        } else {
-            this.addTruck(truck);
+        if (truck != null) {
+            if (this.getTruck(truck.getCode()) != null) {
+                TerminalHandler.println("<yellow>Un camion avec ce code existe déjà.<reset>");
+            } else {
+                this.addTruck(truck);
+            }
         }
     }
 
