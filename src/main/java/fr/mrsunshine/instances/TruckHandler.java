@@ -28,19 +28,35 @@ public class TruckHandler {
 
     // Trucks
 
+    /**
+     * Get all trucks
+     * @return List
+     */
     public List<Truck> getTrucks() {
         return trucks;
     }
 
+    /**
+     * Get all trucks sorted by their code
+     * @return List
+     */
     public List<Truck> getSortedTrucks() {
         trucks.sort(Comparator.comparingInt(Truck::getCode));
         return trucks;
     }
 
+    /**
+     * Set trucks in the list of trucks
+     * @param trucks List of trucks
+     */
     public void setTrucks(List<Truck> trucks) {
         this.trucks = trucks;
     }
 
+
+    /**
+     * Show all existing trucks
+     */
     public void showTrucks() {
         for (Truck truck : this.getSortedTrucks()) {
             TerminalHandler.println(truck.toString());
@@ -50,6 +66,11 @@ public class TruckHandler {
 
     // Truck
 
+    /**
+     * Get a specific truck using his code
+     * @param code Code of the truck
+     * @return Truck or null
+     */
     public Truck getTruck(int code) {
         for (Truck truck : trucks) {
             if (truck.getCode() == code) {
@@ -59,11 +80,21 @@ public class TruckHandler {
         return null;
     }
 
+
+    /**
+     * Add a truck in the truck list
+     * @param truck Truck
+     */
     public void addTruck(Truck truck) {
         if (truck == null) return;
         this.trucks.add(truck);
     }
 
+
+    /**
+     * Remove a truck in the truck list
+     * @param truck Truck
+     */
     public void removeTruck(Truck truck) {
         if (truck == null) return;
         this.trucks.remove(truck);
@@ -72,6 +103,10 @@ public class TruckHandler {
 
     // Refrigerated truck
 
+    /**
+     * Ask the user for all information needed and if something is wrong/miss-spelled, the code send a message to prevent the user.
+     * Else, the truck is added to the truck list.
+     */
     public void addRefrigeratedTruck() {
         try {
             int code = InputReader.readInt("Entrez le code du camion:");
@@ -101,6 +136,11 @@ public class TruckHandler {
     }
 
 
+    /**
+     * Ask the user for the code of the truck to remove.
+     * If the code is invalid or is owned by a non-refrigerated truck, an invalid syntax is sent.
+     * Else, the truck is removed.
+     */
     public void removeRefrigeratedTruck() {
         int code = InputReader.readInt("Numéro du camion frigorifique à supprimer:");
 
@@ -121,6 +161,9 @@ public class TruckHandler {
     }
 
 
+    /**
+     * Show all refrigerated trucks in the truck list (and sorted by their code)
+     */
     public void showRefrigeratedTrucks() {
         for (Truck truck : this.getSortedTrucks()) {
             if (truck instanceof RefrigeratedTruck) {
@@ -132,6 +175,10 @@ public class TruckHandler {
 
     // Dump truck
 
+    /**
+     * Ask the user for all information needed and if something is wrong/miss-spelled, the code send a message to prevent the user.
+     * Else, the truck is added to the truck list.
+     */
     public void addDumpTruck() {
 
         try {
@@ -162,6 +209,11 @@ public class TruckHandler {
     }
 
 
+    /**
+     * Ask the user for the code of the truck to remove.
+     * If the code is invalid or is owned by a non-dump truck, an invalid syntax is sent.
+     * Else, the truck is removed.
+     */
     public void removeDumpTruck() {
         int code = InputReader.readInt("Numéro du camion benne à supprimer:");
 
@@ -182,6 +234,9 @@ public class TruckHandler {
     }
 
 
+    /**
+     * Show all dump trucks in the truck list (and sorted by their code)
+     */
     public void showDumpTrucks() {
         for (Truck truck : this.getSortedTrucks()) {
             if (truck instanceof DumpTruck) {
@@ -191,9 +246,11 @@ public class TruckHandler {
     }
 
 
-
     // Initialising some values
 
+    /**
+     * Just for initialising some data (for test)
+     */
     public void initData() {
         RefrigeratedTruck refregiratedTruck1 = new RefrigeratedTruck(1, "Truck", "Renault", new Date(123, 11, 23), 8);
         DumpTruck dumpTruck1 = new DumpTruck(23, "Aero", "Volvo", new Date(118, 11, 10), 30);
